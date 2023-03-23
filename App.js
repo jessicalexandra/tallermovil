@@ -24,6 +24,7 @@ export default function App() {
   let promedio=0;
 
   // validacion de nota
+  // __________________________________________________________
   Notas.forEach((nota,i)=>{
     if (nota<=0 ||nota >5) {
       return;
