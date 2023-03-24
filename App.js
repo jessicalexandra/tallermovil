@@ -18,15 +18,20 @@ export default function App() {
   const calcular=()=>{
     if (!cc || !nombre || !asigna || !nota1 ||!nota2 || !nota3 )
     return;
-  }
+  
 
   const Notas=[nota1,nota2,nota3];
   let promedio=0;
+
+   let validar=false;
+ 
 
   // validacion de nota
   // __________________________________________________________
   Notas.forEach((nota,i)=>{
     if (nota<=0 ||nota >5) {
+      alert('la nota debe de ser entre 0 y 5')
+      validar=true;
       return;
     }
     if (i==0) {
@@ -35,6 +40,9 @@ export default function App() {
     }
     promedio+=nota*0.35
   })
+  if (validar) {
+    return;
+  }
   setDefinitiva(promedio.toFixed(1));
 
   // agregar la observacion 
@@ -50,7 +58,7 @@ export default function App() {
   setObservacion(observa)
   setguardar([...guardar,{cc,nombre,asigna,nota1,nota2,nota3,promedio,observa}])
 
-
+ }
   const buscar=(cc)=>{
     const{cc:id,nombre,asigna,nota1,nota2,nota3,promedio:Definitiva,observa:observacion}=guardar.find(inf=>inf.cc==cc)||{};
     if(!id){
@@ -84,40 +92,48 @@ export default function App() {
       <Text style={{fontWeight:'bold'}}>Sistema de Notas</Text>
     </View>
     <View style={[styles.container,{flex:10,backgroundColor:"white"}]}>
-      <View style={[{display:"flex",flexDirection:"row",marginBottom:20,gap:10}]}><Text style={{fontWeight:'bol'}}>Identificacion</Text>
-      <TextInput placeholder='ingrese numero la cc'style={styles.inputs}onChangeText={cc=>setcc(cc)}value={cc}></TextInput>
+      <View style={[{display:"flex",flexDirection:"row",marginBottom:20,gap:10,width:"100%",justifyContent:"center"}]}>
+        <Text style={{fontWeight:'bol',flexBasis:'100px'}}>Identificacion</Text>
+        <TextInput placeholder='ingrese numero la cc'style={styles.inputs}onChangeText={cc=>setcc(cc)}value={cc}></TextInput>
       </View>
-      <View style={[{display:"flex",flexDirection:"row",marginBottom:20 ,gap:10}]}><Text style={{fontWeight:'bol'}}>Nombres</Text>
+      <View style={[{display:"flex",flexDirection:"row",marginBottom:20 ,gap:10,width:"100%",justifyContent:"center"}]}>
+        <Text style={{fontWeight:'bol',flexBasis:'100px'}}>Nombres</Text>
       <TextInput placeholder='ingrese el nombre'style={styles.inputs}onChangeText={nombre=>setnombre(nombre)}value={nombre}></TextInput>
       </View>
-      <View style={[{display:"flex",flexDirection:"row",marginBottom:20 ,gap:10}]}><Text style={{fontWeight:'bol'}}>Asignatura</Text>
+      <View style={[{display:"flex",flexDirection:"row",marginBottom:20 ,gap:10,width:"100%",justifyContent:"center"}]}>
+        <Text style={{fontWeight:'bol',flexBasis:'100px'}}>Asignatura</Text>
       <TextInput placeholder='ingrese asignatura'style={styles.inputs}onChangeText={asigna=>setasigna(asigna)}value={asigna}></TextInput>
       </View>
-      <View style={[{display:"flex",flexDirection:"row",marginBottom:20 ,gap:10}]}><Text style={{fontWeight:'bol'}}>Nota momento1(30%)</Text>
-      <TextInput placeholder='ingrese la nota1'style={styles.inputs}onChangeText={nota1=>setnombre(nota1)}value={nota1}></TextInput>
+      <View style={[{display:"flex",flexDirection:"row",marginBottom:20 ,gap:10,width:"100%",justifyContent:"center"}]}>
+        <Text style={{fontWeight:'bol',flexBasis:'100px'}}>Nota momento1(30%)</Text>
+      <TextInput placeholder='ingrese la nota1'style={styles.inputs}onChangeText={nota1=>setnota1(nota1)}value={nota1}></TextInput>
       </View>
-      <View style={[{display:"flex",flexDirection:"row",marginBottom:20 ,gap:10}]}><Text style={{fontWeight:'bol'}}>Nota momento2(35%)</Text>
-      <TextInput placeholder='ingrese la nota2'style={styles.inputs}onChangeText={nota2=>setnota2(cc)}value={nota2}></TextInput>
+      <View style={[{display:"flex",flexDirection:"row",marginBottom:20 ,gap:10,width:"100%",justifyContent:"center"}]}>
+        <Text style={{fontWeight:'bol',flexBasis:'100px'}}>Nota momento2(35%)</Text>
+      <TextInput placeholder='ingrese la nota2'style={styles.inputs}onChangeText={nota2=>setnota2(nota2)}value={nota2}></TextInput>
       </View>
-      <View style={[{display:"flex",flexDirection:"row",marginBottom:20 ,gap:10}]}><Text style={{fontWeight:'bol'}}>Nota momento3(35%)</Text>
+      <View style={[{display:"flex",flexDirection:"row",marginBottom:20 ,gap:10,width:"100%",justifyContent:"center"}]}
+      ><Text style={{fontWeight:'bol',flexBasis:'100px'}}>Nota momento3(35%)</Text>
       <TextInput placeholder='ingrese la nota3'style={styles.inputs}onChangeText={nota3=>setnota3(nota3)}value={nota3}></TextInput>
       </View>
-      <View style={[{display:"flex",flexDirection:"row",marginBottom:20 ,gap:10}]}><Text style={{fontWeight:'bol'}}>Definitiva</Text>
-      <TextInput style={styles.inputs}onChangeText={Definitiva=>setDefinitiva(Definitiva)}value={Definitiva}></TextInput>
+      <View style={[{display:"flex",flexDirection:"row",marginBottom:20 ,gap:10,width:"100%",justifyContent:"center"}]}>
+        <Text style={{fontWeight:'bol',flexBasis:'100px'}}>Definitiva</Text>
+      <TextInput style={styles.inputs} value={Definitiva}></TextInput>
       </View>
-      <View style={[{display:"flex",flexDirection:"row",marginBottom:20 ,gap:10}]}><Text style={{fontWeight:'bol'}}>Observacion</Text>
-      <TextInput placeholder='observacion'style={styles.inputs}onChangeText={observacion=>setDefinitiva(observacion)}value={observacion}></TextInput>
+      <View style={[{display:"flex",flexDirection:"row",marginBottom:20 ,gap:10,width:"100%",justifyContent:"center"}]}>
+        <Text style={{fontWeight:'bol',flexBasis:'100px'}}>Observacion</Text>
+      <TextInput style={styles.inputs} value={observacion}></TextInput>
       </View>
       <View style={[styles.container,{marginTop:20,flexDirection:'row',gap:5}]}>
-        <TouchableOpacity  style={[{backgroundColor:"green"},styles.buttons]}onPress={()=>calcular}>
+        <TouchableOpacity  style={[{backgroundColor:"green"},styles.buttons]} onPress={calcular}>
          <Text style={styles.TextButon}>Calcular/Guardar</Text>
         </TouchableOpacity>
      
-        <TouchableOpacity  style={[{backgroundColor:"green"},styles.buttons]}onPress={()=>limpiar}>
+        <TouchableOpacity  style={[{backgroundColor:"green"},styles.buttons]}onPress={limpiar}>
          <Text style={styles.TextButon}>Limpiar</Text>
         </TouchableOpacity>
       
-        <TouchableOpacity  style={[{backgroundColor:"green"},styles.buttons]}onPress={()=>buscar}>
+        <TouchableOpacity  style={[{backgroundColor:"green"},styles.buttons]}onPress={()=>buscar(cc)}>
          <Text style={styles.TextButon}>Buscar</Text>
         </TouchableOpacity>
       </View>
@@ -125,7 +141,7 @@ export default function App() {
 
     </View>
      
-      <StatusBar style="auto" />
+ 
     </View>
   );
 }
